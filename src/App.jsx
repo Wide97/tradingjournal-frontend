@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import AssetPage from './pages/AssetPage'; // ✅ Import della pagina Asset
 import { PrivateRoute } from './components/PrivateRoute';
 
 function App() {
@@ -18,6 +19,14 @@ function App() {
           element={
             <PrivateRoute>
               <DashboardPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/assets"
+          element={
+            <PrivateRoute>
+              <AssetPage />
             </PrivateRoute>
           }
         />

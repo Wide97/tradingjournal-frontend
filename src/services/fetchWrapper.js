@@ -1,8 +1,5 @@
-// src/services/fetchWrapper.js
-
 const API_URL = import.meta.env.VITE_API_URL;
 console.log("🔍 Tutte le env:", import.meta.env);
-
 
 function authHeader() {
   const token = localStorage.getItem('token');
@@ -31,11 +28,13 @@ async function request(method, url, body) {
   }
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(error || 'Errore nella richiesta');
+    const errorText = await response.text();
+    throw new Error(errorText || 'Errore nella richiesta');
   }
 
-  return response.json();
+  // ✅ gestisce response senza body
+  const text = await response.text();
+  return text ? JSON.parse(text) : null;
 }
 
 export const fetchWrapper = {
