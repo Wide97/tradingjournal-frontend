@@ -1,0 +1,28 @@
+
+// ─────────────────────────────
+// FORM FIELD
+// ─────────────────────────────
+.form-field {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: #a1a1a1;
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #f1f1f1;
+
+    &:focus {
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+      outline: none;
+    }
+  }
+}

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { Card, FormField, PrimaryButton, Spinner } from '../components';
+import '../styles/pages/LoginPage.scss';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -12,7 +14,7 @@ export default function LoginPage() {
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -25,33 +27,44 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="form-control mb-3"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          className="form-control mb-3"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button className="btn btn-primary" type="submit" disabled={loading}>
-          {loading ? 'Accesso...' : 'Login'}
-        </button>
-        {error && <div className="alert alert-danger mt-3">{error}</div>}
-      </form>
+    <div className="login-container">
+      <Card>
+        <h2 className="login-title">🚀 Accesso al Trading Journal</h2>
+        <p className="login-subtitle">Inserisci le tue credenziali per continuare</p>
+        <form onSubmit={handleSubmit}>
+          <FormField
+            label="Username"
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <FormField
+            label="Password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            disabled={loading}
+          />
+         <div className="form-actions">
+         <PrimaryButton
+            text={loading ? 'Accesso...' : 'Login'}
+            type="submit"
+            disabled={loading}
+          />
+          </div>
+
+          {error && <div className="error-message">{error}</div>}
+        </form>
+        {loading && <Spinner />}
+        <p className="register-link">
+          Non hai un account? <Link to="/register">Registrati</Link>
+        </p>
+      </Card>
     </div>
   );
 }
+
 
