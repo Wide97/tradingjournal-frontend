@@ -1,0 +1,65 @@
+@import "../custom"; // importa le variabili e gli stili globali
+
+.valuta-page {
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+
+
+  .valuta-form {
+    background-color: $card-bg;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    margin: 5% 10%;
+
+    .form-buttons {
+      margin-left: auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      height: 100%;
+      margin-bottom: 4.5%;
+    }
+  }
+
+  .valute-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .valuta-card {
+    background-color: $card-bg;
+    padding: 1.2rem 1.5rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: $transition;
+    margin: 0 10%;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    > div {
+      font-size: 1rem;
+      color: $text-color;
+    }
+
+    .btn {
+      margin-left: 0.5rem;
+    }
+  }
+}

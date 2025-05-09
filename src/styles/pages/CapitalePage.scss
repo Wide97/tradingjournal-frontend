@@ -1,6 +1,8 @@
-@import '../custom.scss';
+@import "../custom.scss";
 
 .capitale-page {
+
+    
   .capitale-form {
     background-color: $card-bg;
     padding: 2rem;
@@ -10,32 +12,34 @@
 
     display: grid;
     gap: 1.25rem;
+    margin: 0 10%;
   }
 
   .capitale-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin: 0 10%;
   }
 
   .capitale-item {
     background: $card-bg;
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 5px solid $primary-color;
     border-radius: $border-radius;
     box-shadow: $shadow;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: $transition;
-
-    &:hover {
-      transform: translateY(-3px);
-    }
+    gap: 1rem;
 
     p {
-      margin: 0;
+      flex-grow: 1;
       font-size: 1rem;
+      margin: 0;
       color: $text-color;
+      line-height: 1.4;
 
       strong {
         color: $primary-color;
@@ -43,7 +47,7 @@
     }
 
     button {
-      margin-left: 1rem;
+      flex-shrink: 0;
     }
   }
 
@@ -56,4 +60,14 @@
   .btn.danger {
     margin-bottom: 2rem;
   }
+
+  .divider {
+  border: none;
+  height: 2px;
+  background: $primary-color;
+  margin: 2rem 0;
+  border-radius: 5px;
+  opacity: 0.5;
+}
+
 }

@@ -32,9 +32,15 @@ async function request(method, url, body) {
     throw new Error(errorText || 'Errore nella richiesta');
   }
 
-  // ✅ gestisce response senza body
+  // ✅ Parsing sicuro del JSON con log di debug
   const text = await response.text();
-  return text ? JSON.parse(text) : null;
+  try {
+    return text ? JSON.parse(text) : null;
+  } catch (error) {
+    console.error("❌ Errore nel parsing JSON:", error);
+    console.log("📦 Risposta ricevuta:", text);
+    throw new Error("Errore nel parsing JSON");
+  }
 }
 
 export const fetchWrapper = {
@@ -43,3 +49,4 @@ export const fetchWrapper = {
   put: (url, body) => request('PUT', url, body),
   del: (url) => request('DELETE', url),
 };
+

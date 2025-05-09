@@ -1,46 +1,34 @@
-// src/pages/CapitalePage.jsx
 import { useEffect, useState } from "react";
 import { capitaleService } from "../services/capitaleService";
-import { traderService } from "../services/traderService";
 import Spinner from "../components/Spinner";
 import FormField from "../components/FormField";
 import PrimaryButton from "../components/PrimaryButton";
 import "../styles/pages/CapitalePage.scss";
 
 function CapitalePage() {
+  const traderId = localStorage.getItem("traderId");
   const [capitali, setCapitali] = useState([]);
   const [loading, setLoading] = useState(true);
   const [valore, setValore] = useState("");
   const [date, setDate] = useState("");
-  const [traderId, setTraderId] = useState("");
-  const [traderList, setTraderList] = useState([]);
 
   useEffect(() => {
-    fetchTraders();
-  }, []);
-
-  useEffect(() => {
-    if (traderId) fetchCapitali();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [traderId]);
-
-  const fetchTraders = async () => {
-    try {
-      const data = await traderService.getAll();
-      setTraderList(data);
-      if (data.length > 0) setTraderId(data[0].id);
-    } catch (error) {
-      alert("Errore nel caricamento dei trader: " + error.message);
+    if (!traderId) {
+      alert("Trader non loggato.");
+      return;
     }
-  };
+    fetchCapitali();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchCapitali = async () => {
     try {
       setLoading(true);
       const data = await capitaleService.getAllByTrader(traderId);
+      console.log("📊 Capitali ricevuti:", data);
       setCapitali(data);
     } catch (error) {
-      alert("Errore nel caricamento dei capitali: " + error.message);
+      alert("Errore nel recupero dei capitali: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -48,7 +36,7 @@ function CapitalePage() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    if (!valore || !date || !traderId) return;
+    if (!date || !valore) return;
 
     try {
       await capitaleService.addNewCapitale(traderId, date, parseFloat(valore));
@@ -71,51 +59,48 @@ function CapitalePage() {
     }
   };
 
-  const handleDeleteAll = async () => {
-    if (!window.confirm("Vuoi davvero eliminare tutti i capitali del trader?")) return;
-
-    try {
-      await capitaleService.deleteAllByTrader(traderId);
-      fetchCapitali();
-    } catch (error) {
-      alert("Errore nella cancellazione massiva: " + error.message);
-    }
-  };
-
   return (
     <div className="capitale-page">
-      <h2>📈 Gestione Capitale</h2>
+      <h2 className="text-center">📈 Il tuo Capitale</h2>
 
       <form onSubmit={handleAdd} className="capitale-form">
         <FormField
-          label="Trader"
-          type="select"
-          value={traderId}
-          onChange={(e) => setTraderId(e.target.value)}
-          options={traderList.map((t) => ({ value: t.id, label: t.username }))}
+          label="Data"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
-        <FormField label="Data" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        <FormField label="Valore (€)" type="number" value={valore} onChange={(e) => setValore(e.target.value)} />
-        <PrimaryButton type="submit">Aggiungi</PrimaryButton>
+        <FormField
+          label="Valore (€)"
+          type="number"
+          value={valore}
+          onChange={(e) => setValore(e.target.value)}
+        />
+        <PrimaryButton type="submit" text="Aggiungi" />
       </form>
 
-      <PrimaryButton onClick={handleDeleteAll} danger>
-        Elimina tutti i capitali del trader
-      </PrimaryButton>
+      <hr className="divider" />
 
       {loading ? (
         <Spinner />
       ) : (
         <div className="capitale-list">
           {capitali.length === 0 ? (
-            <p>Nessun capitale presente.</p>
+            <p className="text-center">Nessun capitale presente.</p>
           ) : (
             capitali.map((cap) => (
               <div key={cap.id} className="capitale-item">
-                <p><strong>{cap.data}</strong> — {cap.valore.toFixed(2)} € {cap.variazione !== 0 && `(Δ ${cap.variazione.toFixed(2)})`}</p>
-                <PrimaryButton onClick={() => handleDelete(cap.id)} danger>
-                  Elimina
-                </PrimaryButton>
+                <p>
+                  <strong>{cap.data}</strong> — {cap.valore.toFixed(2)} €{" "}
+                  {typeof cap.variazione === "number" &&
+                    cap.variazione !== 0 &&
+                    `(Δ ${cap.variazione.toFixed(2)})`}
+                </p>
+                <PrimaryButton
+                  onClick={() => handleDelete(cap.id)}
+                  danger
+                  text="Elimina"
+                />
               </div>
             ))
           )}

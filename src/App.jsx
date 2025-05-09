@@ -7,6 +7,7 @@ import DashboardPage from './pages/DashboardPage';
 import AssetPage from './pages/AssetPage'; 
 import CapitalePage from './pages/CapitalePage';
 import { PrivateRoute } from './components/PrivateRoute';
+import ValutaPage from './pages/ValutaPage';
 
 function App() {
   return (
@@ -32,10 +33,18 @@ function App() {
           }
         />
         <Route
-          path="/capital"
+          path="/capitale"
           element={
             <PrivateRoute>
               <CapitalePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/valuta"
+          element={
+            <PrivateRoute>
+              <ValutaPage />
             </PrivateRoute>
           }
         />

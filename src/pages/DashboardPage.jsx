@@ -9,8 +9,14 @@ export default function DashboardPage() {
   };
 
   const goToCapital = () => {
-    navigate("/capital")
+    navigate("/capitale")
   };
+
+    const goToValuta = () => {
+    navigate("/valuta")
+  };
+
+
 
   return (
     <div className="container mt-5">
@@ -22,6 +28,9 @@ export default function DashboardPage() {
       </button>
       <button className="btn mt-3" onClick={goToCapital}>
         Vai alla pagina capitale
+      </button>
+      <button className="btn mt-3" onClick={goToValuta}>
+        Vai alla pagina valuta
       </button>
 
     </div>
