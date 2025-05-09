@@ -1,15 +1,33 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
-// Qui poi aggiungeremo anche DashboardPage, JournalPage ecc.
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
+import { PrivateRoute } from './components/PrivateRoute';
 
-const App = () => {
+function App() {
   return (
     <Routes>
+      {/* Pagina pubblica iniziale */}
+      <Route path="/" element={<LandingPage />} />
+
+      {/* Autenticazione */}
       <Route path="/login" element={<LoginPage />} />
-      {/* Qui aggiungerai le rotte private tipo Dashboard */}
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="/register" element={<RegisterPage />} />
+
+      {/* Area privata */}
+      <Route
+        path="/dashboard"
+        element={
+          <PrivateRoute>
+            <DashboardPage />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
-};
+}
 
 export default App;
+
+
