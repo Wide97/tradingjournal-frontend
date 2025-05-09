@@ -1,0 +1,59 @@
+@import '../custom.scss';
+
+.capitale-page {
+  .capitale-form {
+    background-color: $card-bg;
+    padding: 2rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    margin-bottom: 2rem;
+
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .capitale-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .capitale-item {
+    background: $card-bg;
+    padding: 1.25rem 1.5rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: $transition;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+      color: $text-color;
+
+      strong {
+        color: $primary-color;
+      }
+    }
+
+    button {
+      margin-left: 1rem;
+    }
+  }
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: $primary-color;
+  }
+
+  .btn.danger {
+    margin-bottom: 2rem;
+  }
+}

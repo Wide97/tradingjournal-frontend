@@ -20,6 +20,12 @@ $shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   box-sizing: border-box;
 }
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: radial-gradient(circle at top left, #2a2a2a, #1a1a1a);
@@ -42,9 +48,8 @@ a {
 // LAYOUT APP
 // ─────────────────────────────────────────────
 .app-wrapper {
-  max-width: 1280px;
+
   margin: 0 auto;
-  padding: 2rem;
   animation: fadeIn 0.8s ease;
 }
 

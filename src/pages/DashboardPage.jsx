@@ -8,6 +8,10 @@ export default function DashboardPage() {
     navigate('/assets');
   };
 
+  const goToCapital = () => {
+    navigate("/capital")
+  };
+
   return (
     <div className="container mt-5">
       <h1>Benvenuto nella Dashboard!</h1>
@@ -16,6 +20,10 @@ export default function DashboardPage() {
       <button className="btn mt-3" onClick={goToAssets}>
         Vai alla pagina Asset
       </button>
+      <button className="btn mt-3" onClick={goToCapital}>
+        Vai alla pagina capitale
+      </button>
+
     </div>
   );
 }

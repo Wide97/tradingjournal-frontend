@@ -1,0 +1,23 @@
+.logo {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #f1f1f1;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.logo-img {
+  width: 36px;
+  height: auto;
+}
+
+.logo-text {
+  color: #f1f1f1;
+
+  strong {
+    color: #7c3aed;
+  }
+}

@@ -4,7 +4,8 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
-import AssetPage from './pages/AssetPage'; // ✅ Import della pagina Asset
+import AssetPage from './pages/AssetPage'; 
+import CapitalePage from './pages/CapitalePage';
 import { PrivateRoute } from './components/PrivateRoute';
 
 function App() {
@@ -27,6 +28,14 @@ function App() {
           element={
             <PrivateRoute>
               <AssetPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/capital"
+          element={
+            <PrivateRoute>
+              <CapitalePage />
             </PrivateRoute>
           }
         />
